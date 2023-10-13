@@ -1,15 +1,17 @@
 
-<!-- README  General information
-CHANGELOG   A detailed changelog, intended for programmers
-NEWS    A basic changelog, intended for users
-MANIFEST  A file manifest (a list of files in the directory or archive)
-INSTALL Installation instructions
-TROUBLESHOOTING Troubleshooting instructions
-BUGS    Known bugs and instructions on reporting new ones
-CONTRIBUTING / HACKING / NEW FEATURES
-COPYING / LICENSE   Copyright and licensing information
-AUTHORS Credits
-THANKS  Acknowledgments -->
+<!-- 
+*** README  General information
+*** CHANGELOG   A detailed changelog, intended for programmers
+*** NEWS    A basic changelog, intended for users
+*** MANIFEST  A file manifest (a list of files in the directory or archive)
+*** INSTALL Installation instructions
+*** TROUBLESHOOTING Troubleshooting instructions
+*** BUGS    Known bugs and instructions on reporting new ones
+*** CONTRIBUTING / HACKING / NEW FEATURES
+*** COPYING / LICENSE   Copyright and licensing information
+*** AUTHORS Credits
+*** THANKS  Acknowledgments 
+-->
 
 <a name="readme-top" ></a>
 <!--
@@ -41,7 +43,7 @@ THANKS  Acknowledgments -->
     <img src="./assets/images/taino-life-001.jpg" alt="Logo" width="520" height="340">
   </a>
 
-  <h1 align="center" font-size="900px">Taino Language App</h1>
+  <h1 align="center" font-size="900px" style="color:red;">Taino Language App</h1>
     <!-- add verbiage about mission statement  -->
     <!--  add link website  -->
   <p align="center">
@@ -130,9 +132,7 @@ This section should list any major frameworks/libraries used to bootstrap your p
 
 This is an example of how to list things you need to use the software and how to install them.
 * npm
-  ```sh
-  npm install npm@latest -g
-  ```
+  <code style="background-color:purple;"> npm install npm@latest -g</code>
 
 ## Installation
 
@@ -190,7 +190,7 @@ Donations are what empowers the reclaimation of a people. Any donations you make
 ## Contribution
 
 If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
+Don't forget to give the project a star! Thanks again!:fire:
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/FEATURE`)
