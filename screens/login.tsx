@@ -13,7 +13,7 @@ import {
 
 
 export default class login extends React.Component {
-    render() {
+    render(): React.ReatNode {
       type props = {
         email: string,
         password?: string,
@@ -29,7 +29,7 @@ export default class login extends React.Component {
             <View style={styles.inputView}><TextInput style={styles.inputText} value={email} placeholder='Email' placeholderTextColor='AFAFAF' onChangeText={email => setEmail(email)} /></View>
             <View style={styles.inputView}><TextInput style={styles.inputText} value={password} placeholder='Password' placeholderTextColor='AFAFAF' onChangeText={password => setPassword(password)} /></View>
             <View>
-            <TouchableOpacity><Button type={button} title={}>Login</Button></TouchableOpacity>
+            <TouchableOpacity><Button type='button' title={}>Login</Button></TouchableOpacity>
             <TouchableOpacity><Text>Forget Password?</Text></TouchableOpacity>
             </View>
           </SafeAreaView>
