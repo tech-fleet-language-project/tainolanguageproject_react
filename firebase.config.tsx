@@ -4,7 +4,7 @@ import { getFirestore } from 'firebase/firestore';
 import Constants from './constants';
 // expo-costant?
 
-type constant = {
+type firebaseconfig = {
     apiKey: string,
     authDomain: string,
     projectId: string,
@@ -14,8 +14,9 @@ type constant = {
     databaseURL: string,
 };
 
-// Firebase config
-const firebaseConfig: constant = {
+// manifest.extra
+// firebase config
+const firebaseConfig: firebaseconfig = {
   apiKey: Constants.apiKey,
   authDomain: Constants.authDomain,
   projectId: Constants.projectId,
