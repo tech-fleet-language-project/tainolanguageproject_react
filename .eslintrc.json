@@ -33,6 +33,25 @@
         "semi": [
             "error",
             "always"
+        ],
+        "camelCase": [
+            "always"
+        ],
+        "func-style": [
+            "error",
+            "declaration", 
+            { "allowArrowFunctions": true }
+        ],
+        "arrow-body-style": [
+            "error", 
+            "always"
+        ],
+        "class-methods-use-this": [
+            "error"
+        ],
+        "complexity": [
+            "error", 
+            4
         ]
     }
 }
