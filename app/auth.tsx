@@ -1,4 +1,4 @@
-import { 
+    import { 
     AuthConfiguration,
     RegistrationConfiguration, 
     AuthorizeResult, 
@@ -422,3 +422,4 @@ export class Auth extends React.Component<{}, State> {
   
   export default App;
   
+>>>>>>> 267c88645362b7534ac009afa3d9a44772a4e83f
