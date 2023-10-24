@@ -14,7 +14,7 @@ async function addFirebase(projectId) {
   try {
     const rawResponse = await fetch(uri, options);
     const resp = await rawResponse.json();
-    // log response and error in database
+// log response and error in database
     console.log(resp);
   } catch(err) {
     console.error(err['message']);
