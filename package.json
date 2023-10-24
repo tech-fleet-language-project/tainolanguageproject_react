@@ -2,21 +2,37 @@
   "name": "tainolanguageproject",
   "main": "expo-router/entry",
   "description": "the tainolanguageproject is a learning app to assist users in learning the Taino language.",
-  "keywords": ["taino", "taino language", "indigenous"],
-  "bugs": {"url": "https://github.com/casa-areyto/tainolanguageproject/issues",
-           "email": "tainolanguageproject@gmail.com"},
-  "contributors": [{"name": "Aaron Brinckerhoff ",
-                    "email": "aaron.brinckerhoff@gmail.com",
-                    "url": "https://example.com"},
-                   {"name": "Paulina Kottlewska",
-                    "email": "paulina.kottlewska@gmail.com",
-                    "url": "https://example.com"},
-                   {"name": "Harrion Hughes",
-                    "email": "hughesjh98@yahoo.com",
-                    "url": "https://example.com"}],
-  "repository": {"type": "git",
-                 "url": "https://github.com/casa-areyto/tainolanguageproject"},
-                 "directory": "packages/react-dom",     
+  "keywords": [
+    "taino",
+    "taino language",
+    "indigenous"
+  ],
+  "bugs": {
+    "url": "https://github.com/casa-areyto/tainolanguageproject/issues",
+    "email": "tainolanguageproject@gmail.com"
+  },
+  "contributors": [
+    {
+      "name": "Aaron Brinckerhoff ",
+      "email": "aaron.brinckerhoff@gmail.com",
+      "url": "https://example.com"
+    },
+    {
+      "name": "Paulina Kottlewska",
+      "email": "paulina.kottlewska@gmail.com",
+      "url": "https://example.com"
+    },
+    {
+      "name": "Harrion Hughes",
+      "email": "hughesjh98@yahoo.com",
+      "url": "https://example.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/casa-areyto/tainolanguageproject"
+  },
+  "directory": "packages/react-dom",
   "license": "LGPL-3.0-or-later",
   "version": "1.0.0",
   "private": true,
@@ -33,6 +49,7 @@
   "dependencies": {
     "@expo/vector-icons": "^13.0.0",
     "@react-navigation/native": "^6.0.2",
+    "axios": "^1.5.1",
     "expo": "~49.0.13",
     "expo-font": "~11.4.0",
     "expo-linking": "~5.0.2",
@@ -63,4 +80,4 @@
   "resolutions": {
     "react-refresh": "~0.14.0"
   }
-}  
+}
