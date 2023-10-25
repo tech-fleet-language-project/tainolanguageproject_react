@@ -1,9 +1,17 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
-import Constants from './constants';
-// expo-costant?
+import { getAnalytics } from "firebase/analytics";
+import {default as FirebaseConfig} from './constants/Firebase';
+// expo-constant?
+// firestore to store user data?n
 
+
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 type firebaseconfig = {
     apiKey: string,
     authDomain: string,
@@ -12,22 +20,54 @@ type firebaseconfig = {
     messagingSenderId: string,
     appId: string,
     databaseURL: string,
+    measurementId: string,
 };
+
+// apiKey: "API_KEY",
+// authDomain: "PROJECT_ID.firebaseapp.com",
+// // The value of `databaseURL` depends on the location of the database
+// databaseURL: "https://DATABASE_NAME.firebaseio.com",
+// projectId: "PROJECT_ID",
+// storageBucket: "PROJECT_ID.appspot.com",
+// messagingSenderId: "SENDER_ID",
+// appId: "APP_ID",
+// // For Firebase JavaScript SDK v7.20.0 and later, `measurementId` is an optional field
+// measurementId: "G-MEASUREMENT_ID",
+
+// const firebaseConfig = {
+//   apiKey: "AIzaSyBLU4l8_y2dy_LUd8q5y6qQ_svYftcewsQ",
+//   authDomain: "tainolanguagueproject.firebaseapp.com",
+//   projectId: "tainolanguagueproject",
+//   storageBucket: "tainolanguagueproject.appspot.com",
+//   messagingSenderId: "266921452740",
+//   appId: "1:266921452740:web:fdcb7e79dce32337091591",
+//   measurementId: "G-K4W8CJHB9T"
+// };
+
+
 
 // manifest.extra
 // firebase config
 const firebaseConfig: firebaseconfig = {
-  apiKey: Constants.apiKey,
-  authDomain: Constants.authDomain,
-  projectId: Constants.projectId,
-  storageBucket: Constants.storageBucket,
-  messagingSenderId: Constants.messagingSenderId,
-  appId: Constants.appId,
-  databaseURL: Constants.databaseURL
+  apiKey: FirebaseConfig.apiKey,
+  authDomain: FirebaseConfig.authDomain,
+  projectId: FirebaseConfig.projectId,
+  storageBucket: FirebaseConfig.storageBucket,
+  messagingSenderId: FirebaseConfig.messagingSenderId,
+  appId: FirebaseConfig.appId,
+  databaseURL: FirebaseConfig.databaseURL,
+  measurementId: FirebaseConfig.measurementId,
 };
 
 // initialize firebase
-initializeApp(firebaseConfig);
+const fireApp = initializeApp(firebaseConfig);
 
+export const analytics = getAnalytics(fireApp);
 export const auth = getAuth();
 export const database = getFirestore();
+
+
+
+
+
+

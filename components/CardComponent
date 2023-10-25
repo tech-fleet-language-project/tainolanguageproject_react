@@ -1,5 +1,5 @@
-import { View, StyleSheet} from 'react-native';
-import { Card, Text, Image } from 'react-native-paper';
+import { View, Image, StyleSheet} from 'react-native';
+import { Card, Text } from 'react-native-paper';
 
 
 
@@ -36,6 +36,6 @@ const styles = StyleSheet.create({
     width: 30,  
   },
   cardText: {
-    postion: 'absolute',
+    position: 'absolute',
   }
 });

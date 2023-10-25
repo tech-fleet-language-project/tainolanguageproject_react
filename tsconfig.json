@@ -6,6 +6,8 @@
     "checkJs": true,
     "skipLibCheck": true,
     "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
     "noEmit": true,
     "esModuleInterop": true,
     "moduleResolution": "Node",
@@ -25,9 +27,10 @@
   },
   "include": ["app/*.tsx", "app/**/*.tsx", "next-env.d.ts", "**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"],
   "exclude": ["node_modules"],
-  "extends": ["@tsconfig/react-native/tsconfig.json", "expo/tsconfig.base"]
+  "extends": ["expo/tsconfig.base"]
 }
 
+// @typescript/react-native/typescipt.json
 
 // {
 //   "compilerOptions": {

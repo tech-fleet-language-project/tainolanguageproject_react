@@ -8,12 +8,14 @@ import {
   View, 
   TouchableOpacity,
   Button} from 'react-native'
+  import Auth from '../app/auth'
 
 
-
+// uninstall some of the dependencies in package.json
+// *** Dummy UI for login to test auth and possible template for login *** //
 
 export default class login extends React.Component {
-    render(): React.ReatNode {
+    render(): React.ReactNode {
       type props = {
         email: string,
         password?: string,
@@ -29,7 +31,7 @@ export default class login extends React.Component {
             <View style={styles.inputView}><TextInput style={styles.inputText} value={email} placeholder='Email' placeholderTextColor='AFAFAF' onChangeText={email => setEmail(email)} /></View>
             <View style={styles.inputView}><TextInput style={styles.inputText} value={password} placeholder='Password' placeholderTextColor='AFAFAF' onChangeText={password => setPassword(password)} /></View>
             <View>
-            <TouchableOpacity><Button type='button' title={}>Login</Button></TouchableOpacity>
+            <TouchableOpacity><Button title='Login' color="#f194ff" accessibilityLabel='login button' onPress={} /></TouchableOpacity>
             <TouchableOpacity><Text>Forget Password?</Text></TouchableOpacity>
             </View>
           </SafeAreaView>
@@ -62,65 +64,10 @@ export default class login extends React.Component {
 // export default Login;
 
 
+// var admin = require("firebase-admin");
 
+// var serviceAccount = require("path/to/serviceAccountKey.json");
 
-
-
-// **** Online Emulator
-// import React, { useState } from 'react'
-// import { StyleSheet, Image, SafeAreaView, TextInput, Text } from 'react-native'
-
-
-
-// export default class Login extends React.Component {
-//   render() {
-//     const [email, setEmail] = useState('');
-//     const [password, setPassword] = useState('');
-//     return (
-//         <SafeAreaView style={styles.container}>
-//           <Image style={styles.image} source={{uri: 'https://reactnative.dev/docs/assets/p_cat2.png'}}  />
-//           <TextInput style={styles.input} />
-//           <TextInput style={styles.input} />
-//         </SafeAreaView>
-//     )
-//   }
-// }
-
-// const Login = () => {
-//   return (
-//     <SafeAreaView style={styles.container}>
-//          <TextInput style={styles.input} />
-//          <TextInput style={styles.input} />
-//     </SafeAreaView>
-//   )
-// };
-
-// export default Login;
-
-
-// const styles = StyleSheet.create({
-//  container: {
-//     backgroundColor: 'rbga(0,0,32,0.5)',
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//   },
-//   image: {
-//       uri: 'https://reactnative.dev/docs/assets/p_cat2.png',
-//       width: 300,
-//       height: 300,
-//   },
-//   input: {
-//     backgroundColor: 'red',
-//     margin: 8,
-//     width: 200,
-//     height: 100,
-//   },
-// })
-
-var admin = require("firebase-admin");
-
-var serviceAccount = require("path/to/serviceAccountKey.json");
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
-});
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount)
+// });
