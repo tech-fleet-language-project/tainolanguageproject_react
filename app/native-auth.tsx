@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useMemo } from 'react';
-import {Alert} from 'react-native';
+import { Alert } from 'react-native';
 import { 
   AuthConfiguration,
   RegistrationConfiguration, 
@@ -12,18 +12,18 @@ import {
   logout } from 'react-native-app-auth';
  
 
-type State = {
-    hasLoggedInOnce: boolean,
-    accessToken: ?string,
-    accessTokenExpirationDate: ?string,
-    authorizeAdditionalParameters: ?object,
-    idToken: ?string,
-    refreshToken: ?string,
-    tokenType: ?string,
-    scopes: ?string[],
-    authorizationCode: ?string,
-    codeVerifier: ?string,
-};
+// type State = {
+//     hasLoggedInOnce: boolean,
+//     accessToken: string | null | undefined,
+//     accessTokenExpirationDate: string | null | undefined,
+//     authorizeAdditionalParameters: object | null | undefined,
+//     idToken: string | null | undefined,
+//     refreshToken: string | null | undefined,
+//     tokenType: string | null | undefined,
+//     scopes: string | null | undefined[],
+//     authorizationCode: string | null | undefined,
+//     codeVerifier: string | null | undefined,
+// };
 
 // accessToken - (string) the access token
 // accessTokenExpirationDate - (string) the token expiration date
@@ -36,7 +36,7 @@ type State = {
 // authorizationCode - (string) the authorization code (only if skipCodeExchange=true)
 // codeVerifier - (string) the codeVerifier value used for the PKCE exchange (only if both skipCodeExchange=true and usePKCE=true)
 
-const config: Required<AuthConfiguration> = {
+const config: AuthConfiguration = {
     issuer: '',
     clientId: '',
     redirectUrl: '',
@@ -53,19 +53,19 @@ const config: Required<AuthConfiguration> = {
     }        
 };
 
-const registerConfig: Required<RegistrationConfiguration> = {
+const registerConfig: RegistrationConfiguration = {
     issuer: '<YOUR_ISSUER_URL>',
     redirectUrls: ['<YOUR_REDIRECT_URL>', '<YOUR_OTHER_REDIRECT_URL>'],
   };
 
-AuthorizeResult | hasLoggedInOnce: boolean;
+type newAuthorizeResult = AuthorizeResult & {hasLoggedInOnce: boolean};
 
 React.useEffect(() => { 
   prefetchConfiguration({
     warmAndPrefetchChrome: true,
     connectionTimeoutSeconds: 5,
     ...config,
-  });
+  }); 
 }, []); 
 // config
 // This is your configuration object for the client. The config is passed into each of the methods with optional overrides.
@@ -106,25 +106,46 @@ React.useEffect(() => {
     // endSessionEndpoint - (string) fully formed url to your OpenID Connect end session endpoint. If you want to be able to end a user's session and no issuer is specified, this field is mandatory.
 
     // State is unnecessary because of AuthorizeResult - decide
-export class Auth extends React.Component<{}, State> {
-// pass only the parameter that the function needs: config***
 
-    state: AuthorizeResult = {
-        hasLoggedInOnce: false,
-        accessToken: '',
-        accessTokenExpirationDate: '',
-        authorizeAdditionalParameters: {},
-        idToken: '',
-        refreshToken: '',
-        tokenType: '',
-        scopes: [],
-        authorizationCode: '',
-        codeVerifier: '',
-    };
+  export const handleAuthorize = useCallback(async () => {
+    try {
+    const resultAuth = await authorize(config);
+
+    React.useEffect(() => { hasLoggedInOnce: true }, []);
+    // export result or if class push state and database to log access 
+    console.log('User has been authenticated');
+    return resultAuth;
+    } catch (error) {
+    // setup database to log error 
+    console.error(error);
+    }
+   
+    
+}, []);
+
+
+export default class AuthNative extends React.Component {
+// pass only the parameter that the function needs: config***
+// object vs rest parameter 
+// declaration merge?
+    // state: newAuthorizeResult = {
+    //     hasLoggedInOnce: false,
+    //     accessToken: '',
+    //     accessTokenExpirationDate: '',
+    //     authorizeAdditionalParameters: {},
+    //     idToken: '',
+    //     refreshToken: '',
+    //     tokenType: '',
+    //     scopes: [],
+    //     authorizationCode: '',
+    //     codeVerifier: '',
+    // };
 
   
 
-    const handleRegistration = useCallback(async () => {
+  
+
+    handleRegistration = useCallback(async () => {
         try {
         const resultRegister = await register(registerConfig);
         console.log('User has been registred');
@@ -134,32 +155,40 @@ export class Auth extends React.Component<{}, State> {
     }, []);
 
 
+   
 
-    const handleAuthorize = async () => {
-        try {
-        const resultAuth = await authorize(config, { [connectionTimeoutSeconds: 5, iosPrefersEphemeralSession: true]});
+    handleAuthorize = useCallback(async () => {
+        const [newResultAuth, setNewResultAuth] = useState<object>();
+        try{
+        const resultAuth = await authorize(config);
+
+        setNewResultAuth({newResultAuth: resultAuth})
 
         React.useEffect(() => { hasLoggedInOnce: true }, []);
         // export result or if class push state and database to log access 
         console.log('User has been authenticated');
+        return newResultAuth;
         } catch (error) {
         // setup database to log error 
         console.error(error);
         }
-    };
+        
+    }, []);
 
-    const handleRefresh = useCallback(async () => {
+
+    handleRefresh = useCallback(async () => {
         try {
         const resultRefresh = await refresh(config, {
-            refreshToken: resultAuth.refreshToken,
+            refreshToken: newResultAuth.refreshToken,
         });
         console.log('User has been revoked');
         } catch (error) {
         console.error(error);
         }
-    }, [resultAuth]);
+    }, [newResultAuth]);
 
-    const handleRovoke = useCallback(async () => {
+
+    handleRovoke = useCallback(async () => {
         try {
         const resultRevoke = await revoke(config, {
             tokenToRevoke: resultAuth.accessToken || resultAuth.refreshToken ,
@@ -182,11 +211,11 @@ export class Auth extends React.Component<{}, State> {
     //     }
     // };
 
-    const handleLogOut = useCallback(async () => {
+    handleLogOut = useCallback(async () => {
         try {
         const resultLogOut = await logout(config, {
             idToken: resultAuth.idToken,
-            postLogoutRedirectUrl: 'send user back to home if not done automatically',
+            postLogoutRedirectUrl: 'send user back to home if not done automatically conditional statement',
         });
         console.log('User signed out');
         } catch (error) {
@@ -194,224 +223,10 @@ export class Auth extends React.Component<{}, State> {
         }
     }, [resultAuth]);
 
-};
-
-  const [authState, setAuthState] = useState(defaultAuthState);
-
-  const handleAuthorize = useCallback(async () => {
-    try {
-      const newAuthState = await authorize(config);
-
-      setState({
-        hasLoggedInOnce: true,
-        ...newAuthState,
-      });
-      // okta?!
-      await Keychain.setGenericPassword(
-        'accessToken',
-        newAuthState.accessToken,
-      );
-    } catch (error) {
-      Alert.alert(
-        'Failed to log in',
-        (error as Record<string, never>)?.message,
-      );
-    }
-  }, []);
-
-  const getAccessToken = useCallback(async (): Promise<string | undefined> => {
-    try {
-      
-      const credentials = await Keychain.getGenericPassword();
-      if (credentials) {
-        return credentials.password;
-      } else {
-        console.log('No credentials stored');
-      }
-    } catch (error) {
-      console.log("Keychain couldn't be accessed!", error);
-    }
-  }, []);
-
-  const [userInfo, setUserInfo] = useState<Record<string, string> | null>(null);
-
-  const getUser = useCallback(async () => {
-    try {
-      const access_token = await getAccessToken();
-      if (access_token !== null) {
-        fetch('<URL>' + '/oauth2/userinfo', {
-          method: 'GET',
-          headers: {
-            Authorization: 'Bearer ' + access_token,
-          },
-        })
-          .then(response => response.json())
-          .then(json => {
-            console.log(json);
-            setUserInfo(json);
-          })
-          .catch(error => {
-            console.error(error);
-          });
-      }
-    } catch (error) {
-      console.error('User does not exist', error);
-    }
-  }, []);
+}; // end of class
 
 
 
   
-  const configs = {
-    identityserver: {
-      issuer: 'https://demo.duendesoftware.com',
-      clientId: 'interactive.public',
-      redirectUrl: 'io.identityserver.demo:/oauthredirect',
-      additionalParameters: {},
-      scopes: ['openid', 'profile', 'email', 'offline_access'],
-  
-      // serviceConfiguration: {
-      //   authorizationEndpoint: '',
-      //   tokenEndpoint: '',
-      //   revocationEndpoint: '',
-      //   registrationEndpoint: '',
-      //   endSessionEndpoint:'',
-
-    },
-    auth0: {
-      // From https://openidconnect.net/
-      issuer: 'https://samples.auth0.com',
-      clientId: 'kbyuFDidLLm280LIwVFiazOqjO3ty8KH',
-      redirectUrl: 'https://openidconnect.net/callback',
-      additionalParameters: {},
-      scopes: ['openid', 'profile', 'email', 'phone', 'address'],
-  
-      // serviceConfiguration: {
-      //   authorizationEndpoint: '',
-      //   tokenEndpoint: '',
-      //   revocationEndpoint: '',
-      //   registrationEndpoint: '',
-      //   endSessionEndpoint:'',
-    },
-  };
-  
-  const defaultAuthState = {
-    hasLoggedInOnce: false,
-    provider: '',
-    accessToken: '',
-    accessTokenExpirationDate: '',
-    refreshToken: '',
-  };
-  
-  const App = () => {
-    const [authState, setAuthState] = useState(defaultAuthState);
-    React.useEffect(() => {
-      prefetchConfiguration({
-        warmAndPrefetchChrome: true,
-        connectionTimeoutSeconds: 5,
-        ...configs.auth0,
-      });
-    }, []);
-  
-    const handleAuthorize = useCallback(async (provider: string | number) => {
-      try {
-        const config = configs[provider];
-        const newAuthState = await authorize({
-          ...config,
-          connectionTimeoutSeconds: 5,
-          iosPrefersEphemeralSession: true,
-        });
-  
-        setAuthState({
-          hasLoggedInOnce: true,
-          provider: provider,
-          ...newAuthState,
-        });
-      } catch (error) {
-        // Alert.alert('Failed to log in', error.message);
-        console.error('Failed to log in', error);
-      }
-    }, []);
-  
-    const handleRefresh = useCallback(async () => {
-      try {
-        const config = configs[authState.provider];
-        const newAuthState = await refresh(config, {
-          refreshToken: authState.refreshToken,
-        });
-  
-        setAuthState(current => ({
-          ...current,
-          ...newAuthState,
-          refreshToken: newAuthState.refreshToken || current.refreshToken,
-        }));
-      } catch (error) {
-        // Alert.alert('Failed to refresh token', error.message);
-        console.error('Failed to refresh token', error)
-      }
-    }, [authState]);
-  
-    const handleRevoke = useCallback(async () => {
-      try {
-        const config = configs[authState.provider];
-        await revoke(config, {
-          tokenToRevoke: authState.accessToken,
-          sendClientId: true,
-        });
-  
-        setAuthState({
-          provider: '',
-          accessToken: '',
-          accessTokenExpirationDate: '',
-          refreshToken: '',
-        });
-      } catch (error) {
-        // Alert.alert('Failed to revoke token', error.message);
-        console.error('Failed to revoke token', error)
-      }
-    }, [authState]);
-  
-    const showRevoke = useMemo(() => {
-      if (authState.accessToken) {
-        const config = configs[authState.provider];
-        if (config.issuer || config.serviceConfiguration.revocationEndpoint) {
-          return true;
-        }
-      }
-      return false;
-    }, [authState]);
-  
-    return (
-      <Page>
-       
-    
-  
-        <ButtonContainer>
-          {!authState.accessToken ? (
-            <>
-              <Button
-                onPress={() => handleAuthorize('identityserver')}
-                text="Authorize IdentityServer"
-                color="#DA2536"
-              />
-              <Button
-                onPress={() => handleAuthorize('auth0')}
-                text="Authorize Auth0"
-                color="#DA2536"
-              />
-            </>
-          ) : null}
-          {authState.refreshToken ? (
-            <Button onPress={handleRefresh} text="Refresh" color="#24C2CB" />
-          ) : null}
-          {showRevoke ? (
-            <Button onPress={handleRevoke} text="Revoke" color="#EF525B" />
-          ) : null}
-        </ButtonContainer>
-      </Page>
-    );
-  };
-  
-  export default App;
   
 >>>>>>> 267c88645362b7534ac009afa3d9a44772a4e83f

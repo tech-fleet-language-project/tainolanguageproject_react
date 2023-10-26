@@ -1,9 +1,10 @@
 import { PROJECT_ID } from './Firebase';
+import getAccessToken from './get-token'
 
 const fetch = require('node-fetch');
 
 async function addFirebase(PROJECT_ID: string) {
-  const accessToken = getAccessToken();
+  const accessToken = getAccessToken()
   const uri = 'https://firebase.googleapis.com/v1beta1/projects/' + PROJECT_ID + ':addFirebase';
   const options = {
     method: 'POST',
@@ -18,7 +19,7 @@ async function addFirebase(PROJECT_ID: string) {
     const resp = await rawResponse.json();
 // log response and error in database
     console.log(resp);
-  } catch(e) {
-    console.error(e.message);
+  } catch(error) {
+    console.error(error);
   }
 }

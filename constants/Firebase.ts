@@ -1,5 +1,3 @@
-
-
 export const PROJECT_ID = 'tainolanguagueproject';
 
 export default { 

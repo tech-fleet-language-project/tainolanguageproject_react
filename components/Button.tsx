@@ -63,15 +63,7 @@ export default function Button(buttonProps: buttonprops) {
     return(
         <Pressable 
             onPress={''} 
-            style={args => 
-                    {if (args.pressed) {
-                    return([styles.buttonContainer, {opacity: 0.5, backgroundColor: backgroundColor, width: width}])
-                    }
-                    else {
-                    return([styles.buttonContainer, {opacity: 1.0, backgroundColor: backgroundColor, width: width}])
-                    }
-                    }
-                }
+            style = { [styles.buttonContainer, {{opacity: pressed ? 0.5 : 1 },  backgroundColor: backgroundColor, width: width}] }
         > 
         <Text style={ [styles.buttonText, {color: titleColor, size: titleSize}] }>{title}</Text>
         </Pressable>
