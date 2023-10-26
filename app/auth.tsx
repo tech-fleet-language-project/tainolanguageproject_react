@@ -42,7 +42,8 @@ const config: Required<AuthConfiguration> = {
     redirectUrl: '',
     scopes: ['openid', 'profile', 'email', 'offline_access'],
     additionalParameters: {},
-    connectionTimeoutSeconds: 0,
+    connectionTimeoutSeconds: 5,
+    iosPrefersEphemeralSession: false,
     serviceConfiguration: {
       authorizationEndpoint: '',
       tokenEndpoint: '',
