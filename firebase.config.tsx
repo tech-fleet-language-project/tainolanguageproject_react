@@ -4,14 +4,14 @@ import { getFirestore } from 'firebase/firestore';
 import { getAnalytics } from "firebase/analytics";
 import {default as FirebaseConfig} from './constants/Firebase';
 // expo-constant?
-// firestore to store user data?n
+// firestore to store user data?
 
 
-// TODO: Add SDKs for Firebase products that you want to use
+// TODO: Add SDKs for Firebase products that want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// your web app's Firebase configuration
+// for Firebase JS SDK v7.20.0 and later, measurementId is optional
 type firebaseconfig = {
     apiKey: string,
     authDomain: string,
@@ -47,7 +47,7 @@ type firebaseconfig = {
 
 
 // manifest.extra
-// firebase config
+// firebase config parameters
 const firebaseConfig: firebaseconfig = {
   apiKey: FirebaseConfig.apiKey,
   authDomain: FirebaseConfig.authDomain,

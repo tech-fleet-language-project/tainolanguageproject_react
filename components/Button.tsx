@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
-import { Pressable, Text, StyleSheet} from 'react-native';
+import { Pressable, Text, StyleSheet, Button, TouchableOpacity} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { default as Colors}  from '../constants/Colors';
 
 
@@ -7,23 +8,15 @@ import { default as Colors}  from '../constants/Colors';
 
 type buttonprops = {
     title: string,
-    titleColor: string,
+    titleColor?: string,
     titleSize: number,
-    backgroundColor: string | null | undefined,
-    width: string | null | undefined,
+    backgroundColor?: string,
+    width?: number,
     accessibilityLabel: string,
-    onPressFunction: Function,
-} & typeof defaultProps;
-
-
-const defaultProps = {
-    title: 'Button',
-    titleColor: '#ffffff',
-    titleSize: 14,
-    backgroundColor: '#000000',
-    width: '100%',
-    accessibilityLabel: 'button',   
 };
+
+
+
 // onPress default should route to error message or default action?
 
 
@@ -40,7 +33,7 @@ const defaultProps = {
 
 
 
-export default function Button(buttonProps: buttonprops) {
+export default function StyledButton(buttonProps: buttonprops, onPress, icon) {
 
     const {
         title = buttonProps.title,
@@ -48,8 +41,7 @@ export default function Button(buttonProps: buttonprops) {
         titleSize = buttonProps.titleSize,
         backgroundColor = buttonProps.backgroundColor,
         width = buttonProps.width,
-        accessibilityLabel = buttonProps.accessibilityLabel,
-        onPress = buttonProps.onPress,   
+        accessibilityLabel = buttonProps.accessibilityLabel,   
     } = buttonProps;
 
     // const props = useMemo((buttonProps: buttonprops) => { return { title: buttonProps.title,
@@ -61,21 +53,36 @@ export default function Button(buttonProps: buttonprops) {
     //     onPress: buttonProps.onPress }; });
 
     return(
-        <Pressable 
-            onPress={''} 
-            style = { [styles.buttonContainer, {{opacity: pressed ? 0.5 : 1 },  backgroundColor: backgroundColor, width: width}] }
+        <Pressable onPress={onPress} 
+                   style={ [styles.buttonContainer, 
+                            {backgroundColor: backgroundColor, width: width}] 
+                         }
+            
+                 
         > 
-        <Text style={ [styles.buttonText, {color: titleColor, size: titleSize}] }>{title}</Text>
+            <TouchableOpacity >
+                {icon ? <Icon.Buton name={icon}
+                                    onPress={onPress}
+                                    style={styles.buttonIcon}></Icon.Buton> : null}
+                <Text style={ [styles.buttonText, {color: titleColor, fontSize: titleSize}] }>{title}</Text>
+            
+            </TouchableOpacity>
         </Pressable>
+        
 
     );
 };
 
-<Button title={title} color={backgroundColor}  />
+{/* <Button title={title} color={backgroundColor}  /> */}
 // change based on style guide
-Button.defaultProps = defaultProps;
-
-
+StyledButton.defaultProps  = {
+    title: 'Button',
+    titleColor: '#ffffff',
+    titleSize: 14,
+    backgroundColor: '#000000',
+    width: 100,
+    accessibilityLabel: 'button',   
+};
 
 const styles = StyleSheet.create({
     buttonContainer: {
@@ -88,5 +95,22 @@ const styles = StyleSheet.create({
     buttonText: {
         fontWeight: '500',
     },
+    buttonIcon: {
+        padding: 8,
+    },
 
 });
+
+// buttonContainer: {
+//     elevation: 8,
+//     borderRadius: 10,
+//     paddingVertical: 10,
+//     paddingHorizontal: 12
+//   },
+//   buttonText: {
+//     fontSize: 18,
+//     color: "#fff",
+//     fontWeight: "bold",
+//     alignSelf: "center",
+//     textTransform: "uppercase"
+//   }

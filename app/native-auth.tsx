@@ -14,15 +14,15 @@ import {
 
 // type State = {
 //     hasLoggedInOnce: boolean,
-//     accessToken: string | null | undefined,
-//     accessTokenExpirationDate: string | null | undefined,
-//     authorizeAdditionalParameters: object | null | undefined,
-//     idToken: string | null | undefined,
-//     refreshToken: string | null | undefined,
-//     tokenType: string | null | undefined,
-//     scopes: string | null | undefined[],
-//     authorizationCode: string | null | undefined,
-//     codeVerifier: string | null | undefined,
+//     accessToken?: string,
+//     accessTokenExpirationDate?: string,
+//     authorizeAdditionalParameters?: object | null | undefined,
+//     idToken?: string,
+//     refreshToken?: string,
+//     tokenType?: string,
+//     scopes?: string[],
+//     authorizationCode?: string,
+//     codeVerifier?: string,
 // };
 
 // accessToken - (string) the access token
@@ -228,5 +228,3 @@ export default class AuthNative extends React.Component {
 
 
   
-  
->>>>>>> 267c88645362b7534ac009afa3d9a44772a4e83f

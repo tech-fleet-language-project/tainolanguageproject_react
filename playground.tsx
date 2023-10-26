@@ -31,10 +31,10 @@ type defaultauthstate = {
     hasLoggedInOnce: boolean,
     provider: string
     accessToken: string,
-    accessTokenExpirationDate: string,
+    accessTokenExpirationDate?: string,
     refreshToken: string,
     connectionTimeoutSeconds: number,
-    iosPrefersEphemeralSession: boolean,
+    iosPrefersEphemeralSession?: boolean,
    
   };
 
