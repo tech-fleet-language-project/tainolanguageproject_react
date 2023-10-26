@@ -51,7 +51,7 @@ type defaultauthstate = {
   };
 
   export const Auth1 = () => {
-    const [authState, setAuthState] = useState(defaultAuthState);
+    const [authState, setAuthState] = useState<objec>(defaultAuthState);
 
     const handleAuthorize = useCallback(async () => {
       try {
@@ -155,7 +155,7 @@ type defaultauthstate = {
 
   
   export const Auth2 = () => {
-    const [authState, setAuthState] = useState(defaultAuthState);
+    const [authState, setAuthState] = useState<object>(defaultAuthState);
     React.useEffect(() => {
       prefetchConfiguration({
         warmAndPrefetchChrome: true,
