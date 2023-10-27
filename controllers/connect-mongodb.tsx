@@ -3,7 +3,11 @@ const { connect } = mongoose;
 
 
 export async function connectMongoDB() {
-    await connect('mongodb://127.0.0.1:27017/test')
-    .then(console.log('Successful connected to MongoDB.'))
-    .catch(error => {console.error('Unsuccessful in connecting to MongoDb.', error);})
+    //TODO: update after creating MongoDB accounts
+    await mongoose.connect('mongodb://127.0.0.1:27017/test', {
+        ssl: true,
+        sslValidate: false,
+        })
+        .then(console.log('Successful connected to MongoDB.'))
+        .catch(error => {console.error('Unsuccessful in connecting to MongoDb.', error);})
 }

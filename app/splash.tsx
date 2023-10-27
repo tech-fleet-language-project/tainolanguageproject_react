@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
   StatusBar,
   StyleSheet,
   SafeAreaView,
   useColorScheme,
+  AppState,
 } from 'react-native';
 import Colors  from '../constants/Colors';
 import SplashScreen from 'react-native-splash-screen';
@@ -17,8 +18,15 @@ export function Splash() {
     backgroundColor: isDarkMode ? Colors.dark.color : Colors.light.color,
   };
 
+  const appState = useRef(AppState.currentState);
+
   useEffect(() => {
-    SplashScreen.hide();
+    if (appState.current.match(/active/)) {
+      SplashScreen.show();
+    }
+    else if (appState.current.match(/inactive|background/)) {
+      SplashScreen.hide();
+    }
   }, []);
 
   return (

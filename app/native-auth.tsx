@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import { Alert } from 'react-native';
+import { default as FirebaseConfig} from '../constants/Firebase';
 import { 
   AuthConfiguration,
   RegistrationConfiguration, 
@@ -128,22 +129,22 @@ export default class AuthNative extends React.Component {
 // pass only the parameter that the function needs: config***
 // object vs rest parameter 
 // declaration merge?
-    // state: newAuthorizeResult = {
-    //     hasLoggedInOnce: false,
-    //     accessToken: '',
-    //     accessTokenExpirationDate: '',
-    //     authorizeAdditionalParameters: {},
-    //     idToken: '',
-    //     refreshToken: '',
-    //     tokenType: '',
-    //     scopes: [],
-    //     authorizationCode: '',
-    //     codeVerifier: '',
-    // };
+    defaultAuthResult: newAuthorizeResult = {
+        hasLoggedInOnce: false,
+        accessToken: '',
+        accessTokenExpirationDate: '',
+        authorizeAdditionalParameters: {},
+        idToken: '',
+        refreshToken: '',
+        tokenType: '',
+        scopes: [],
+        authorizationCode: '',
+        codeVerifier: '',
+    };
 
   
 
-  
+
 
     handleRegistration = useCallback(async () => {
         try {
@@ -158,11 +159,11 @@ export default class AuthNative extends React.Component {
    
 
     handleAuthorize = useCallback(async () => {
-        const [newResultAuth, setNewResultAuth] = useState<object>();
+        const [newResultAuth, setNewResultAuth] = useState<object>(this.defaultAuthResult);
         try{
         const resultAuth = await authorize(config);
 
-        setNewResultAuth({newResultAuth: resultAuth})
+        setNewResultAuth({...resultAuth})
 
         React.useEffect(() => { hasLoggedInOnce: true }, []);
         // export result or if class push state and database to log access 
@@ -179,13 +180,13 @@ export default class AuthNative extends React.Component {
     handleRefresh = useCallback(async () => {
         try {
         const resultRefresh = await refresh(config, {
-            refreshToken: newResultAuth.refreshToken,
+            refreshToken: this.newResultAuth.refreshToken,
         });
         console.log('User has been revoked');
         } catch (error) {
         console.error(error);
         }
-    }, [newResultAuth]);
+    }, [this.newResultAuth]);
 
 
     handleRovoke = useCallback(async () => {

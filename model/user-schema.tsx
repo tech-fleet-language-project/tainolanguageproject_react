@@ -58,5 +58,5 @@ const User = new Schema<IUser>({
 
 const UserProfile = model<IUSser>('UserProfile', User);
 // push to DB error log
-run().catch(error => {console.error(error)})
+
 module.exports = UserProfile;

@@ -59,9 +59,9 @@ export default function StyledButton(buttonProps: buttonprops, onPress, icon) {
                          }                
         > 
             <TouchableOpacity>
-                {icon ? <Icon.Buton name={icon}
+                {icon ? <Icon.Button name={icon}
                                     onPress={onPress}
-                                    style={styles.buttonIcon}></Icon.Buton> : null}
+                                    style={styles.buttonIcon}></Icon.Button> : null}
                 <Text style={ [styles.buttonText, 
                               {color: titleColor, 
                               fontSize: titleSize}] 
