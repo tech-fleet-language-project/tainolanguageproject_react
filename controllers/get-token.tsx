@@ -5,8 +5,8 @@ export default function getAccessToken() {
       .then(accessToken => {
         return accessToken.access_token;
       })
-      .catch(err => {
+      .catch(error => {
         console.error('Unable to get access token');
-        console.error(err);
+        console.error(error);
       });
 }

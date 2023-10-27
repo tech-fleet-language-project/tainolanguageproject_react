@@ -1,6 +1,6 @@
 export const PROJECT_ID = 'tainolanguagueproject';
 
-
+//TODO considrer create a private ke for googleapi
 // config parameters for Firebase initialization and functionality
 export default { 
     apiKey: 'AIzaSyBLU4l8_y2dy_LUd8q5y6qQ_svYftcewsQ',

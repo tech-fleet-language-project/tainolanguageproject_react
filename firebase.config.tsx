@@ -60,6 +60,8 @@ const firebaseConfig: firebaseconfig = {
 };
 
 // initialize firebase
+// @params {Object} firebaseConfig - the parameters to config firebase
+// @function 
 const fireApp = initializeApp(firebaseConfig);
 
 export const analytics = getAnalytics(fireApp);
