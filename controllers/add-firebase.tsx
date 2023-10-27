@@ -1,5 +1,5 @@
 import { PROJECT_ID } from '../constants/Firebase';
-import getAccessToken from '../controllers/Get-Token'
+import getAccessToken from '../controllers/get-token'
 
 const fetch = require('node-fetch');
 
