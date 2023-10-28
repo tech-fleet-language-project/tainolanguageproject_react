@@ -5,7 +5,7 @@ module.exports = function (api) {
     presets: [
       [
         'babel-preset-expo',
-        {
+				{
           native: {
             disableImportExportTransform,
           },
@@ -17,5 +17,3 @@ module.exports = function (api) {
     ],
   };
 };
-
-

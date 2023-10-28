@@ -17,37 +17,46 @@ function TabBarIcon(props: {
 export default function TabLayout() {
   const colorScheme = useColorScheme();
 
-  return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-      }}>
+	return (
+		<Tabs
+			screenOptions={{
+				tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+			}}
+		>
       <Tabs.Screen
         name="index"
         options={{
           title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
-                    size={25}
-                    color={Colors[colorScheme ?? 'light'].text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
-          ),
+          tabBarIcon: ({ color }) => {
+            return <TabBarIcon name="code" color={color} />;
+          },
+          headerRight: () => {
+            return (
+              <Link href="/modal" asChild>
+                <Pressable>
+                  {({ pressed }) => {
+                    return (
+                      <FontAwesome
+                        name="info-circle"
+												size={25}
+												color={Colors[colorScheme ?? 'light'].text}
+												style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+											/>
+										);
+									}}
+								</Pressable>
+              </Link>
+            );
+          },
         }}
       />
       <Tabs.Screen
         name="two"
         options={{
           title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => {
+            return <TabBarIcon name="code" color={color} />;
+          },
         }}
       />
     </Tabs>

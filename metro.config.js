@@ -1,16 +1,12 @@
 // Learn more https://docs.expo.io/guides/customizing-metro
 const { getDefaultConfig } = require('expo/metro-config');
 
-
-
 /** @type {import('expo/metro-config').MetroConfig} */
 // @ts-ignore
 const config = getDefaultConfig(__dirname, {
   // [Web-only]: Enables CSS support in Metro.
   isCSSEnabled: true,
 });
-
-
 
 // config.transformer.getTransformOptions = async () => ({
 //   transform: {
@@ -37,6 +33,4 @@ const config = getDefaultConfig(__dirname, {
 //   },
 // };
 
-
 module.exports = config;
-

@@ -1,0 +1,44 @@
+
+# Learn more  https://eslint.org/docs/latest/use/configure/ignore 
+
+# dependencies
+node_modules/
+
+# Expo
+.expo/
+dist/
+web-build/
+
+
+# local env files
+.env*.local
+
+# typescript
+*.tsbuildinfo
+
+# build files
+!.build
+.build/*
+!.build/test.js
+
+# vs code
+.vscode/*
+
+expo-env.d.ts
+
+.hintrc
+
+.gitignore
+
+# linter
+.eslintrc.json
+
+# config files
+babel.config.js
+metro.config.js
+tsconfig.json
+
+
+# package files
+package.json
+package-lock.json

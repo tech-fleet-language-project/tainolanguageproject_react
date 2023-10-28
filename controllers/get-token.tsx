@@ -2,12 +2,14 @@ const admin = require('firebase-admin');
 // import admin from 'firebase-admin';
 
 export default function getAccessToken() {
-  return admin.credential.applicationDefault().getAccessToken()
-      .then(accessToken => {
-        return accessToken.access_token;
-      })
-      .catch(error => {
-        console.error('Unable to get access token');
-        console.error(error);
-      });
+  return admin.credential
+		.applicationDefault()
+		.getAccessToken()
+    .then((accessToken) => {
+			return accessToken.access_token;
+		})
+		.catch((error) => {
+			console.error('Unable to get access token');
+			console.error(error);
+		});
 }

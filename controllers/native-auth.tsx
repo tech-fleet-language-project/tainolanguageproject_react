@@ -1,17 +1,17 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import { Alert } from 'react-native';
-import { default as FirebaseConfig} from '../constants/Firebase';
-import { 
+import {
   AuthConfiguration,
-  RegistrationConfiguration, 
-  AuthorizeResult, 
+  RegistrationConfiguration,
+  AuthorizeResult,
   prefetchConfiguration,
-  authorize, 
-  refresh, 
-  revoke, 
-  register, 
-  logout } from 'react-native-app-auth';
- 
+  authorize,
+  refresh,
+  revoke,
+  register,
+  logout,
+} from "react-native-app-auth";
+import { default as FirebaseConfig } from "../constants/Firebase";
 
 // type State = {
 //     hasLoggedInOnce: boolean,
@@ -38,49 +38,49 @@ import {
 // codeVerifier - (string) the codeVerifier value used for the PKCE exchange (only if both skipCodeExchange=true and usePKCE=true)
 
 const config: AuthConfiguration = {
-    issuer: '',
-    clientId: '',
-    redirectUrl: '',
-    scopes: ['openid', 'profile', 'email', 'offline_access'],
-    additionalParameters: {},
-    connectionTimeoutSeconds: 5,
-    iosPrefersEphemeralSession: false,
-    serviceConfiguration: {
-      authorizationEndpoint: '',
-      tokenEndpoint: '',
-      revocationEndpoint: '',
-      registrationEndpoint: '',
-      endSessionEndpoint:'',
-    }        
+  issuer: '',
+	clientId: '',
+	redirectUrl: '',
+	scopes: ['openid', 'profile', 'email', 'offline_access'],
+	additionalParameters: {},
+	connectionTimeoutSeconds: 5,
+	iosPrefersEphemeralSession: false,
+	serviceConfiguration: {
+		authorizationEndpoint: "",
+		tokenEndpoint: "",
+		revocationEndpoint: "",
+		registrationEndpoint: "",
+		endSessionEndpoint: "",
+	},
 };
 
 const registerConfig: RegistrationConfiguration = {
-    issuer: '<YOUR_ISSUER_URL>',
-    redirectUrls: ['<YOUR_REDIRECT_URL>', '<YOUR_OTHER_REDIRECT_URL>'],
-  };
-
-type newAuthorizeResult = AuthorizeResult & {hasLoggedInOnce: boolean};
-
-const resultAuth: newAuthorizeResult = {
-    hasLoggedInOnce: false,
-    accessToken: '',
-    accessTokenExpirationDate: '',
-    authorizeAdditionalParameters: {},
-    idToken: '',
-    refreshToken: '',
-    tokenType: '',
-    scopes: [],
-    authorizationCode: '',
-    codeVerifier: '',
+  issuer: '<YOUR_ISSUER_URL>',
+	redirectUrls: ['<YOUR_REDIRECT_URL>', '<YOUR_OTHER_REDIRECT_URL>'],
 };
 
-React.useEffect(() => { 
+type newAuthorizeResult = AuthorizeResult & { hasLoggedInOnce: boolean };
+
+const resultAuth: newAuthorizeResult = {
+  hasLoggedInOnce: false,
+	accessToken: '',
+	accessTokenExpirationDate: '',
+	authorizeAdditionalParameters: {},
+	idToken: '',
+	refreshToken: '',
+	tokenType: "",
+	scopes: [],
+	authorizationCode: "",
+	codeVerifier: "",
+};
+
+React.useEffect(() => {
   prefetchConfiguration({
     warmAndPrefetchChrome: true,
     connectionTimeoutSeconds: 5,
     ...config,
-  }); 
-}, []); 
+  });
+}, []);
 // config
 // This is your configuration object for the client. The config is passed into each of the methods with optional overrides.
 
@@ -113,106 +113,89 @@ React.useEffect(() => {
 // connectionTimeoutSeconds - (number) configure the request timeout interval in seconds. This must be a positive number. The default values are 60 seconds on iOS and 15 seconds on Android.
 
 // serviceConfiguration - (object) you may manually configure token exchange endpoints in cases where the issuer does not support the OIDC discovery protocol, or simply to avoid an additional round trip to fetch the configuration. If no issuer (above) is provided, the service configuration is mandatory.
-    // authorizationEndpoint - (string) REQUIRED fully formed url to the OAuth authorization endpoint
-    // tokenEndpoint - (string) REQUIRED fully formed url to the OAuth token exchange endpoint
-    // revocationEndpoint - (string) fully formed url to the OAuth token revocation endpoint. If you want to be able to revoke a token and no issuer is specified, this field is mandatory.
-    // registrationEndpoint - (string) fully formed url to your OAuth/OpenID Connect registration endpoint. Only necessary for servers that require client registration.
-    // endSessionEndpoint - (string) fully formed url to your OpenID Connect end session endpoint. If you want to be able to end a user's session and no issuer is specified, this field is mandatory.
+// authorizationEndpoint - (string) REQUIRED fully formed url to the OAuth authorization endpoint
+// tokenEndpoint - (string) REQUIRED fully formed url to the OAuth token exchange endpoint
+// revocationEndpoint - (string) fully formed url to the OAuth token revocation endpoint. If you want to be able to revoke a token and no issuer is specified, this field is mandatory.
+// registrationEndpoint - (string) fully formed url to your OAuth/OpenID Connect registration endpoint. Only necessary for servers that require client registration.
+// endSessionEndpoint - (string) fully formed url to your OpenID Connect end session endpoint. If you want to be able to end a user's session and no issuer is specified, this field is mandatory.
 
-    // State is unnecessary because of AuthorizeResult - decide
-
-
-
+// State is unnecessary because of AuthorizeResult - decide
 
 export default class AuthNative extends React.Component {
-// pass only the parameter that the function needs: config***
-// object vs rest parameter 
-// declaration merge or intersection?
+	// pass only the parameter that the function needs: config***
+	// object vs rest parameter
+	// declaration merge or intersection?
 
+  handleRegistration = useCallback(async () => {
+		try {
+      const resultRegister = await register(registerConfig);
+      console.log("User has been registred");
+		} catch (error) {
+			console.error(error);
+		}
+	}, []);
 
+  handleAuthorize = useCallback(async () => {
+    // const resultAuth = await authorize(config);
+		try {
+			const [newResultAuth, setNewResultAuth] = useState<Object>(resultAuth);
+			setNewResultAuth({ ...resultAuth });
 
-    handleRegistration = useCallback(async () => {
-        try {
-        const resultRegister = await register(registerConfig);
-        console.log('User has been registred');
-        } catch (error) {
-        console.error(error);
-        }
-    }, []);
+			React.useEffect(() => {
+				true;
+			}, []);
+			// export result or if class push state and database to log access
+			console.log('User has been authenticated');
+			return resultAuth;
+    } catch (error) {
+			// setup database to log error
+      console.error(error);
+    }
+  }, []);
 
+  handleRefresh = useCallback(async () => {
+		try {
+      const resultRefresh = await refresh(config, {
+        refreshToken: resultAuth.refreshToken,
+			});
+			console.log('User has been revoked');
+		} catch (error) {
+			console.error(error);
+		}
+	}, [resultAuth]);
 
-   
-    
-   
-    handleAuthorize = useCallback(async () => {
-        // const resultAuth = await authorize(config);
-        try{
-        const [newResultAuth, setNewResultAuth] = useState<Object>(resultAuth);
-        setNewResultAuth({...resultAuth})
+  handleRovoke = useCallback(async () => {
+    try {
+			const resultRevoke = await revoke(config, {
+				tokenToRevoke: resultAuth.accessToken || resultAuth.refreshToken,
+				includeBasicAuth: true,
+				sendClientId: true,
+			});
+			console.log("User has been revoked");
+		} catch (error) {
+			console.error(error);
+		}
+	}, [resultAuth]);
 
-        React.useEffect(() => { hasLoggedInOnce: true }, []);
-        // export result or if class push state and database to log access 
-        console.log('User has been authenticated');
-        return resultAuth;
-        
-        } catch (error) {
-        // setup database to log error 
-        console.error(error);
-        }
-        
-    }, []);
+  // const handleSignOut = async () => {
+  //     try {
+	//     const resultSignOut = await signout(config);
+	//     console.log('User signed out');
+	//     } catch (error) {
+	//     console.error(error);
+	//     }
+	// };
 
-
-    handleRefresh = useCallback(async () => {
-        try {
-        const resultRefresh = await refresh(config, {
-            refreshToken: resultAuth.refreshToken,
-        });
-        console.log('User has been revoked');
-        } catch (error) {
-        console.error(error);
-        }
-    }, [resultAuth]);
-
-
-    handleRovoke = useCallback(async () => {
-        try {
-        const resultRevoke = await revoke(config, {
-            tokenToRevoke: resultAuth.accessToken || resultAuth.refreshToken ,
-            includeBasicAuth: true,
-            sendClientId: true,
-        });
-        console.log('User has been revoked');
-        } catch (error) {
-        console.error(error);
-        }
-    }, [resultAuth]);
-
-
-    // const handleSignOut = async () => {
-    //     try {
-    //     const resultSignOut = await signout(config);
-    //     console.log('User signed out');
-    //     } catch (error) {
-    //     console.error(error);
-    //     }
-    // };
-
-    handleLogOut = useCallback(async () => {
-        try {
-        const resultLogOut = await logout(config, {
-            idToken: resultAuth.idToken,
-            postLogoutRedirectUrl: 'send user back to home if not done automatically conditional statement',
-        });
-        console.log('User signed out');
-        } catch (error) {
-        console.error(error);
-        }
-    }, [resultAuth]);
-   
-
-}; // end of class
-
-
-
-  
+	handleLogOut = useCallback(async () => {
+		try {
+			const resultLogOut = await logout(config, {
+				idToken: resultAuth.idToken,
+				postLogoutRedirectUrl:
+          "send user back to home if not done automatically conditional statement",
+			});
+			console.log("User signed out");
+		} catch (error) {
+			console.error(error);
+		}
+	}, [resultAuth]);
+} // end of class
