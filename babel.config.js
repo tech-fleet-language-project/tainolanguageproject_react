@@ -1,11 +1,12 @@
-module.exports = function (api) {
+dmodule.exports = function (api) {
   api.cache(true);
   const disableImportExportTransform = true;
   return {
     presets: [
       [
-        'babel-preset-expo',
-				{
+        'module:metro-react-native-babel-preset',
+        'react-native',
+        {
           native: {
             disableImportExportTransform,
           },
@@ -15,6 +16,5 @@ module.exports = function (api) {
         },
       ],
     ],
-    plugins: ['expo-router/babel'],
   };
 };

@@ -1,10 +1,18 @@
-// Learn more https://docs.expo.io/guides/customizing-metro
-const { getDefaultConfig } = require('expo/metro-config');
-// import { getDefaultConfig } from 'expo/metro-config';
+const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
 
-/** @type {import('expo/metro-config').MetroConfig} */
-// @ts-ignore
-const config = getDefaultConfig(__dirname, {
+/**
+ * Metro configuration
+ * https://facebook.github.io/metro/docs/configuration
+ *
+ * @type {import('metro-config').MetroConfig}
+ */
+const config = {};
+
+module.exports = mergeConfig(getDefaultConfig(__dirname), config);
+
+
+
+{
   // [Web-only]: Enables CSS support in Metro.
   isCSSEnabled: true,
 });
