@@ -27,46 +27,45 @@ const config: AuthConfiguration = {
 };
 
 
-type defaultauthstate = {
+type resultauth = {
     hasLoggedInOnce: boolean,
     provider: string
     accessToken: string,
     accessTokenExpirationDate?: string,
     refreshToken: string,
-    connectionTimeoutSeconds: number,
     iosPrefersEphemeralSession?: boolean,
    
   };
 
-  const defaultAuthState: defaultauthstate = {
+  const resultAuth: resultauth = {
     hasLoggedInOnce: false,
     provider: '',
     accessToken: '',
     accessTokenExpirationDate: '',
     refreshToken: '',
     iosPrefersEphemeralSession: false,
-    connectionTimeoutSeconds: 5,
+  
 
   
   };
 
   export const Auth1 = () => {
-    const [authState, setAuthState] = useState<object>(defaultAuthState);
+    const [authState, setAuthState] = useState<object>(resultAuth);
 
     const handleAuthorize = useCallback(async () => {
       try {
-        const newAuthState = await authorize(config);
+        const authState = await authorize(config);
 
         setAuthState({
           hasLoggedInOnce: true,
           iosPrefersEphemeralSession: false,
           connectionTimeoutSeconds: 5,
-          ...newAuthState,
+          ...authState,
         });
         // okta?!
         await Keychain.setGenericPassword(
           'accessToken',
-          newAuthState.accessToken,
+          authState.accessToken,
         );
       } catch (error) {
         Alert.alert(
@@ -155,7 +154,7 @@ type defaultauthstate = {
 
   
   export const Auth2 = () => {
-    const [authState, setAuthState] = useState(defaultAuthState);
+    const [authState, setAuthState] = useState(resultAuth);
     React.useEffect(() => {
       prefetchConfiguration({
         warmAndPrefetchChrome: true,
@@ -167,7 +166,7 @@ type defaultauthstate = {
     const handleAuthorize = useCallback(async provider => {
       try {
         const config = configs[provider];
-        const newAuthState = await authorize({
+        const authState = await authorize({
           ...config,
           connectionTimeoutSeconds: 5,
           iosPrefersEphemeralSession: true,
@@ -176,7 +175,7 @@ type defaultauthstate = {
         setAuthState({
           hasLoggedInOnce: true,
           provider: provider,
-          ...newAuthState,
+          ...authState,
         });
       } catch (error) {
         // Alert.alert('Failed to log in', error.message);
@@ -211,10 +210,11 @@ type defaultauthstate = {
         });
   
         setAuthState({
-          provider: '',
-          accessToken: '',
-          accessTokenExpirationDate: '',
-          refreshToken: '',
+          provider: authState.provider,
+          accessToken: authState.accessToken,
+          accessTokenExpirationDate: authState.accessTokenExpirationDate,
+          refreshToken: authState.refreshToken,
+          hasLoggedInOnce: false,
         });
       } catch (error) {
         // Alert.alert('Failed to revoke token', error.message);

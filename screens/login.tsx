@@ -11,12 +11,19 @@ import {
   import AuthNative from '../app/native-auth'
 
 
+/**
+ * login in to the application 
+ * @param {string} email - email of user
+ * @param {string} password - password of user
+ * @returns {JSX.Element}
+ * @constructor
+ */
+
 // uninstall some of the dependencies in package.json
 // *** Dummy UI for login to test auth and possible template for login *** //
 
 export default function login() {
-    
-      
+       
       
       // redundant but I want to remind me of other way to implement type safety
       const [email, setEmail] = useState<string>('');

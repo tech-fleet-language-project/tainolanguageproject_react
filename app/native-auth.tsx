@@ -61,6 +61,19 @@ const registerConfig: RegistrationConfiguration = {
 
 type newAuthorizeResult = AuthorizeResult & {hasLoggedInOnce: boolean};
 
+const resultAuth: newAuthorizeResult = {
+    hasLoggedInOnce: false,
+    accessToken: '',
+    accessTokenExpirationDate: '',
+    authorizeAdditionalParameters: {},
+    idToken: '',
+    refreshToken: '',
+    tokenType: '',
+    scopes: [],
+    authorizationCode: '',
+    codeVerifier: '',
+};
+
 React.useEffect(() => { 
   prefetchConfiguration({
     warmAndPrefetchChrome: true,
@@ -108,41 +121,13 @@ React.useEffect(() => {
 
     // State is unnecessary because of AuthorizeResult - decide
 
-  export const handleAuthorize = useCallback(async () => {
-    try {
-    const resultAuth = await authorize(config);
 
-    React.useEffect(() => { hasLoggedInOnce: true }, []);
-    // export result or if class push state and database to log access 
-    console.log('User has been authenticated');
-    return resultAuth;
-    } catch (error) {
-    // setup database to log error 
-    console.error(error);
-    }
-   
-    
-}, []);
 
 
 export default class AuthNative extends React.Component {
 // pass only the parameter that the function needs: config***
 // object vs rest parameter 
-// declaration merge?
-    defaultAuthResult: newAuthorizeResult = {
-        hasLoggedInOnce: false,
-        accessToken: '',
-        accessTokenExpirationDate: '',
-        authorizeAdditionalParameters: {},
-        idToken: '',
-        refreshToken: '',
-        tokenType: '',
-        scopes: [],
-        authorizationCode: '',
-        codeVerifier: '',
-    };
-
-  
+// declaration merge or intersection?
 
 
 
@@ -157,18 +142,19 @@ export default class AuthNative extends React.Component {
 
 
    
-
+    
+   
     handleAuthorize = useCallback(async () => {
-        const [newResultAuth, setNewResultAuth] = useState<object>(this.defaultAuthResult);
+        // const resultAuth = await authorize(config);
         try{
-        const resultAuth = await authorize(config);
-
+        const [newResultAuth, setNewResultAuth] = useState<Object>(resultAuth);
         setNewResultAuth({...resultAuth})
 
         React.useEffect(() => { hasLoggedInOnce: true }, []);
         // export result or if class push state and database to log access 
         console.log('User has been authenticated');
-        return newResultAuth;
+        return resultAuth;
+        
         } catch (error) {
         // setup database to log error 
         console.error(error);
@@ -180,13 +166,13 @@ export default class AuthNative extends React.Component {
     handleRefresh = useCallback(async () => {
         try {
         const resultRefresh = await refresh(config, {
-            refreshToken: this.newResultAuth.refreshToken,
+            refreshToken: resultAuth.refreshToken,
         });
         console.log('User has been revoked');
         } catch (error) {
         console.error(error);
         }
-    }, [this.newResultAuth]);
+    }, [resultAuth]);
 
 
     handleRovoke = useCallback(async () => {
@@ -223,6 +209,7 @@ export default class AuthNative extends React.Component {
         console.error(error);
         }
     }, [resultAuth]);
+   
 
 }; // end of class
 

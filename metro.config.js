@@ -4,19 +4,19 @@ const { getDefaultConfig } = require('expo/metro-config');
 
 
 /** @type {import('expo/metro-config').MetroConfig} */
+// @ts-ignore
 const config = getDefaultConfig(__dirname, {
   // [Web-only]: Enables CSS support in Metro.
-  // @ignore
   isCSSEnabled: true,
 });
 
 
 
-config.transformer.getTransformOptions = async () => ({
-  transform: {
-    experimentalImportSupport: true,
-  },
-});
+// config.transformer.getTransformOptions = async () => ({
+//   transform: {
+//     experimentalImportSupport: true,
+//   },
+// });
 
 // config.transformer.minifierPath = 'metro-minify-terser';
 

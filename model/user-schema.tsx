@@ -1,6 +1,7 @@
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
+// const { Schema, model } = mongoose;
 
-const { Schema, model } = mongoose;
+import { Schema, model } from 'mongoose';
 
 interface IUser {
     firebaseID: string,
@@ -48,15 +49,13 @@ const User = new Schema<IUser>({
         type: Boolean,
         default: false
     },
-    {
-        timestamp: true,
-    },
+    timestamp: true,
 
 });
 
 
 
-const UserProfile = model<IUSser>('UserProfile', User);
+const UserProfile = model<IUser>('UserProfile', User);
 // push to DB error log
 
 module.exports = UserProfile;

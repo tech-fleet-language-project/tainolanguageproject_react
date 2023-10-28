@@ -13,7 +13,7 @@ import {
     AuthErrorCodes} from "firebase/auth";
 import { auth } from '@/firebase.config'
 
-
+// TODO: code may need to be denormalized
 
 export default class AuthFirebase extends React.Component {
     // sign up new user
@@ -104,7 +104,7 @@ export default class AuthFirebase extends React.Component {
         } 
         else if (ProviderId.FACEBOOK === provider) {
             const provider = new FacebookAuthProvider();
-            signInWithPopup(auth, provider)
+            await signInWithPopup(auth, provider)
             .then((result) => {
                 // the signed-in user info.
                 const user = result.user;

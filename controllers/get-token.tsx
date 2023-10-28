@@ -1,4 +1,5 @@
 const admin = require('firebase-admin');
+// import admin from 'firebase-admin';
 
 export default function getAccessToken() {
   return admin.credential.applicationDefault().getAccessToken()
