@@ -18,14 +18,14 @@
     "forceConsistentCasingInFileNames": true,
     "plugins": [
       {
-        "name": ""
+        "name": "expo-router"
       }
     ],
     "paths": {
       "@/*": ["./*"]
     }
   },
-  "include": ["app/*.tsx", "app/**/*.tsx", "next-env.d.ts", "**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"],
+  "include": ["app/*.tsx", "app/**/*.tsx", "next-env.d.ts", "**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts", ".eslintrc.json"],
   "exclude": ["node_modules"],
   "extends": ["expo/tsconfig.base"]
 }

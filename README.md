@@ -32,39 +32,35 @@
 *** https://www.markdownguide.org/
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Contributors][contributors-shield]][contributors-url] [![Forks][forks-shield]][forks-url] [![Stargazers][stars-shield]][stars-url] [![Issues][issues-shield]][issues-url] [![GNT License][license-shield]][license-url] [![LinkedIn][linkedin-shield]][linkedin-url] 
+
+<code style="algin:center;">[![Contributors][contributors-shield]][contributors-url] [![Forks][forks-shield]][forks-url] [![Stargazers][stars-shield]][stars-url] [![Issues][issues-shield]][issues-url] [![GNT License][license-shield]][license-url] [![LinkedIn][linkedin-shield]][linkedin-url]</code>
 
 
 
 <!-- PROJECT LOGO -->
 <br />
 <div align="center" >
-  <a href="https://github.com/">
-    <img src="./assets/images/taino-life-001.jpg" alt="Logo" width="520" height="340">
-  </a>
-
-  <h1 align="center" font-size="900px" style="color:red;">Taino Language App</h1>
-    <!-- add verbiage about mission statement  -->
-    <!--  add link website  -->
-  <p align="center">
-    <br />
-    
-    <a href="/">View Page</a> 
-    •
-    <a href="https://github.com/casa-areyto/tainolanguageproject/issues">Report Bug</a>
-    •
-    <a href="https://github.com/casa-areyto/tainolanguageproject/issues">Request Feature</a>
-
-  </p>
-  <p align="center">
-      
-    <a href="/">Website</a>
-    ·
-    <a href="/">Discord</a>
-    ·
-    <a href="https://github.com/casa-areyto/tainolanguageproject/issues">Issues</a>
-  </p>
-   <a href="/"><strong>Learn More »</strong></a
+    <a href="https://github.com/tech-fleet-language-project/tainolanguageproject">
+      <img src="./assets/images/taino_art.jpg" alt="Logo" width="400" height="340">
+    </a>
+    <h1 align="center" font-size="900px" style="color:red;">Taíno Language App</h1>
+      <!-- add verbiage about mission statement  -->
+      <!--  add link website  -->
+    <p align="center">
+      <a href="/">View Page</a> 
+      •
+      <a href="https://github.com/tech-fleet-language-project/tainolanguageproject/issues">Report Bug</a>
+      •
+      <a href="https://github.com/tech-fleet-language-project/tainolanguageproject/issues">Request Feature</a>
+    </p>
+    <p align="center"> 
+      <a href="/">Website</a>
+      •
+      <a href="/">Discord</a>
+      •
+      <a href="https://github.com/tech-fleet-language-project/tainolanguageproject/issues">Issues</a>
+    </p>
+    <a href="/"><strong>Learn More »</strong></a>
 </div>
 
 
@@ -81,11 +77,12 @@
       </ul>
     </li>
     <li><a href="#getting-started">Getting Started</a></li>
+    <li><a href="#prerequisites" >Prerquisites</a></li>
     <li><a href="#installation">Installation</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#newsletter">Blog</a></li>
     <li><a href="#changelog">Change Log</a></li>
-    <li><a href="#contribution">Contribution</a></li>
+    <li><a href="#contributions">Contributions</a></li>
     <li><a href="#donation">Donation</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -99,16 +96,17 @@
 ## About The Project
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
+<img src="./assets/images/puerto-rico-travel.jpg" alt="Logo" width="100%" height="340">
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
 
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+This section lists any major frameworks/libraries used to bootstrap and build this project. Any other add-ons/plugins for the project can be found in the acknowledgements's section.
 
 
-* [![React][React.js]][React-url]
+[![React][React.js]][React-url]
 
 
 
@@ -132,25 +130,30 @@ This section should list any major frameworks/libraries used to bootstrap your p
 
 This is an example of how to list things you need to use the software and how to install them.
 * npm
-  <code style="background-color:purple;"> npm install npm@latest -g</code>
+ ```sh
+ npm install npm@latest -g
+``` 
 
 ## Installation
 
 
 <!-- there may be a key in the future -->
-1. Get a free API Key at [https://example.com](https://example.com)
+1. Get API Key
+```sh
+Get a free API Key at [https://example.com](https://example.com)
+```
 2. Clone the repo
-   ```sh
-   git clone https://github.com/your_username_/Project-Name.git
-   ```
+```sh
+git clone https://github.com/tech-fleet-language-project/tainolanguageproject.git
+```
 3. Install NPM packages
-   ```sh
-   npm install
-   ```
+```sh
+npm install
+```
 4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
+```js
+const API_KEY = 'ENTER YOUR API';
+```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -160,12 +163,12 @@ This is an example of how to list things you need to use the software and how to
 <!-- ROADMAP -->
 ## Roadmap
 
-- [] Update
-- [] 
-- [] 
+- [] Build and Config Firebase or Native Option for Authentication
+- [] Build Components and Styling 
+- [] Create Models for MongoDB
 - [] Finish ReadMe
 
-See the [open issues](https://github.com/casa-areyto/tainolanguageproject/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/tech-fleet-language-project/tainolanguageproject/issuess) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -186,8 +189,8 @@ Dear Programmer, please log all changes made.
 
 Donations are what empowers the reclaimation of a people. Any donations you make are **greatly appreciated**.
 
-<!-- CONTRIBUTION -->
-## Contribution
+<!-- CONTRIBUTIONS -->
+## Contributions
 
 If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
 Don't forget to give the project a star! Thanks again!:fire:
@@ -206,7 +209,7 @@ Don't forget to give the project a star! Thanks again!:fire:
 <!-- LICENSE -->
 ## License
 
-Distributed under the GNT License. See `LICENSE.txt` for more information.
+Distributed under the GNL License. See [`LICENSE.txt`](https://github.com/tech-fleet-language-project/tainolanguageproject/blob/main/LICENSE) for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -214,10 +217,10 @@ Distributed under the GNT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-LinkedIn - [@linkedin]()
-Email - [@email](https://example.com)
-Website Link : [](https://example.com)
-Git Project Link: [Taino Language App](https://example.com)
+LinkedIn - [@LinkedIn](https://www.linkedin.com/company/tech-fleet-community/)
+Email - [@Email](tainolanguageproject@gmail.com)
+Website Link : [Tech Fleet](https://techfleet.org/)
+Git Project Link: [Taino Language App](https://github.com/tech-fleet-language-project/tech-fleet-language-project)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -225,8 +228,9 @@ Git Project Link: [Taino Language App](https://example.com)
 ## Credits
 
 Okino Kamali Leiba - [Okino Kamali Leiba](https://linkedin.com/in/okinoleiba)
-
-
+Paulina Kottlewska - [Paulina Kottlewska](https://linkedin.com/in/okinoleiba)
+Aaron Brinckerhoff - [Aaron Brinckerhoff](https://example.com)
+Harrison Hughes - [Harrison Hughes](https://example.com)
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ACKNOWLEDGMENTS -->
@@ -261,8 +265,3 @@ Okino Kamali Leiba - [Okino Kamali Leiba](https://linkedin.com/in/okinoleiba)
 [product-screenshot]:/lalich_home.png
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
-
-
-
-
-

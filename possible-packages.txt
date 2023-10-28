@@ -1,0 +1,55 @@
+
+"lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write"
+    ]
+  },
+  "dependencies": {
+    "@react-native-community/datetimepicker": "6.7.3",
+    "@react-navigation/drawer": "^6.6.3",
+    "@react-navigation/native": "^6.1.7",
+    "@react-navigation/native-stack": "^6.9.13",
+    "@react-navigation/stack": "^6.3.17",
+  
+    "expo-constants": "~14.2.1",
+    "expo-crypto": "~12.2.1",
+   
+    "expo-random": "~13.1.1",
+    "expo-standard-web-crypto": "^1.6.0",
+    "expo-status-bar": "~1.4.4",
+    "metro-resolver": "0.76.0",
+    "mobx": "^6.9.0",
+    "mobx-keystone": "^1.6.2",
+    "mobx-react-lite": "^3.4.3",
+   
+    "react-native-get-random-values": "~1.8.0",
+    "react-native-reanimated": "~2.14.4",
+  
+    "react-navigation-stack": "react-navigation/stack",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/react-native-get-random-values": "^1.8.0",
+    "@types/react-navigation": "^3.4.0",
+    "@types/uuid": "^9.0.2",
+    "@typescript-eslint/eslint-plugin": "^5.60.1",
+    "@typescript-eslint/parser": "^5.60.1",
+    "eslint": "^8.44.0",
+    "eslint-config-universe": "^11.2.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.3",
+    "prettier": "^2.8.8",
+    "typescript": "^4.9.4"
+  },
+  "eslintConfig": {
+    "extends": "universe/native"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "resolutions": {
+    "metro": "0.76.0",
+    "metro-resolver": "0.76.0"
+  }
