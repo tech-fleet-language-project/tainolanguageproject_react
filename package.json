@@ -12,12 +12,14 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
+  "type": "module",
   "jest": {
     "preset": "jest-expo"
   },
   "dependencies": {
     "@expo/vector-icons": "^13.0.0",
     "@react-navigation/native": "^6.0.2",
+    "ajv": "^8.12.0",
     "axios": "^1.5.1",
     "expo": "^49.0.16",
     "expo-font": "~11.4.0",
