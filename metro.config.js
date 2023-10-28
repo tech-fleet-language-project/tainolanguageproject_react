@@ -1,21 +1,54 @@
 const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
 
-/**
- * Metro configuration
- * https://facebook.github.io/metro/docs/configuration
- *
- * @type {import('metro-config').MetroConfig}
- */
-const config = {};
+module.exports = (() => {
+  /**
+   * Metro configuration
+   * https://facebook.github.io/metro/docs/configuration
+   *
+   * @type {import('metro-config').MetroConfig}
+   */
+  const config = getDefaultConfig(__dirname);
 
-module.exports = mergeConfig(getDefaultConfig(__dirname), config);
+  const {transformer, resolver} = config;
 
+  config.transformer = {
+    ...transformer,
+    babelTransformerPath: require.resolve(
+      'react-native-typescript-transformer',
+    ),
+    minifierPath: 'metro-minify-terser',
+    minifierConfig: {
+      compress: {
+        // enable all unsafe optimizations.
+        unsafe: true,
+        unsafe_arrows: true,
+        unsafe_comps: true,
+        unsafe_Function: true,
+        unsafe_math: true,
+        unsafe_symbols: true,
+        unsafe_methods: true,
+        unsafe_proto: true,
+        unsafe_regexp: true,
+        unsafe_undefined: true,
+        unused: true,
+      },
+    },
+    getTransformOptions: async () => ({
+      transform: {
+        experimentalImportSupport: true,
+        inlineRequires: true,
+      },
+    }),
+  };
 
+  config.resolver = {
+    ...resolver,
+    assetExts: resolver.assetExts,
+    sourceExts: resolver.sourceExts,
+  };
 
-{
-  // [Web-only]: Enables CSS support in Metro.
-  isCSSEnabled: true,
-});
+  return config;
+})();
 
 // config.transformer.getTransformOptions = async () => ({
 //   transform: {
@@ -41,5 +74,3 @@ module.exports = mergeConfig(getDefaultConfig(__dirname), config);
 //     unused: true,
 //   },
 // };
-
-module.exports = config;

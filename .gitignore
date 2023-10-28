@@ -67,3 +67,7 @@ yarn-error.log
 
 # vs code
 .vscode
+
+# Jest
+#
+.jest/
