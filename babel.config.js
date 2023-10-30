@@ -1,8 +1,10 @@
-dmodule.exports = function (api) {
+module.exports = function (api) {
   api.cache(true);
   const disableImportExportTransform = true;
   return {
     presets: [
+      ['@babel/preset-env', {targets: {node: 'current'}}],
+      '@babel/preset-typescript',
       [
         'module:metro-react-native-babel-preset',
         'react-native',
@@ -16,18 +18,18 @@ dmodule.exports = function (api) {
         },
       ],
     ],
-   plugins: [
-       [
-          'module-resolver',
-          {
-            root: ['./'],
-            extensions: ['.ios.js', '.android.js', '.js', '.ts', '.tsx', '.json'],
-            alias: {
-            tests: ['**/tests/**'],
-              "@components": "./components",
-            }
-          }
-       ]
-     ]
-  }
+    plugins: [
+      [
+        'module-resolver',
+        {
+          root: ['./'],
+          extensions: ['.ios.js', '.android.js', '.js', '.ts', '.tsx', '.json'],
+          alias: {
+            tests: ['**/tests*/**'],
+            '@components': './components',
+          },
+        },
+      ],
+    ],
+  };
 };

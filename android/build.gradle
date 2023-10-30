@@ -1,5 +1,12 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
+// def properties = new Properties()
+// if (rootProject.file("local.properties").exists()) {
+//     properties.load(project.rootProject.file("local.properties").newDataInputStream())
+// }
+
+// resValue "string", "sdk_dir", properties.getProperty("sdk.dir", "")
+
 buildscript {
     ext {
         buildToolsVersion = "33.0.0"

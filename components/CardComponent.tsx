@@ -1,19 +1,28 @@
 import { View, Image, StyleSheet } from "react-native";
 import { Card, Text } from "react-native-paper";
 
-export default function CardTemplate(image: string, text: string) {
+type cardprops = {
+	image?: string,
+	text: string,
+	style?: string 
+};
+
+// use Themed.tsx and StyledText.tsx text: if it will be the same throughout the program or override properties
+export default function CardTemplate(props: cardprops) {
+	const {image, text, style={}} = props;
+
 	return (
 		<Card style={styles.cardContainer} >
 			<Card.Actions>
 				<Card.Content style={styles.cardContent} >
 					<Card.Cover style={styles.cardLogo} source={require('../assets/images/adaptive-icon.png')} />
-					<Text variant="bodySmall"  style={styles.cardText} >Body Mediumdfadffada</Text>
+					<Text variant="bodySmall"  style={styles.cardText} >{text}</Text>
 				</Card.Content>
 			</Card.Actions>
 		</Card>
 	);
 };
-}
+
 
 const styles = StyleSheet.create({
 	cardContainer: {

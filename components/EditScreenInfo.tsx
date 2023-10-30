@@ -6,6 +6,7 @@ import { ExternalLink } from './ExternalLink';
 import { MonoText } from './StyledText';
 import { Text, View } from './Themed';
 
+// use Themed.tsx and StyledText.tsx text: if it will be the same throughout the program or override properties
 export default function EditScreenInfo({ path }: { path: string }) {
   return (
     <View>
