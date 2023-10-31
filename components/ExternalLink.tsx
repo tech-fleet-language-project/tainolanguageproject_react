@@ -1,7 +1,13 @@
 // import { Link } from 'expo-router';
 // import * as WebBrowser from 'expo-web-browser';
 import React from 'react';
-import { Platform,  TouchableOpacity, StyleSheet, Text, Linking  } from 'react-native';
+import {
+  Platform,
+  TouchableOpacity,
+  StyleSheet,
+  Text,
+  Linking,
+} from 'react-native';
 
 // use Themed.tsx and StyledText.tsx text: if it will be the same throughout the program or override properties
 
@@ -29,26 +35,28 @@ import { Platform,  TouchableOpacity, StyleSheet, Text, Linking  } from 'react-n
 //   );
 // }
 
+export function ExternalLink(props: {
+  href: string;
+  children: Element,
+  style?: {} | Object | undefined;
+}) {
+  const {href, children, style = {}} = props;
 
-export function ExternalLink(props: { href: string; children: string; style?: {} | Object | undefined; }) {
-    const { href, children, style = {} } = props;
-    
-    const onPress = () => Linking.canOpenURL(href).then(() => {
-        Linking.openURL(href);
+  const onPress = () =>
+    Linking.canOpenURL(href).then(() => {
+      Linking.openURL(href);
     });
 
-    return (
-        <TouchableOpacity onPress={onPress}>
-            <Text style={[styles.text, style]}>{children}</Text>
-        </TouchableOpacity>
-    );
-};
-
-
+  return (
+    <TouchableOpacity onPress={onPress}>
+      <Text style={[styles.text, style]}>{children}</Text>
+    </TouchableOpacity>
+  );
+}
 
 const styles = StyleSheet.create({
-    text: {
-        fontSize: 16,
-        textDecoration: 'underline'
-    },
+  text: {
+    fontSize: 16,
+    textDecoration: 'underline',
+  },
 });

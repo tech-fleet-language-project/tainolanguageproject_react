@@ -5,8 +5,8 @@ module.exports = function (api) {
     presets: [
       ['@babel/preset-env', {targets: {node: 'current'}}],
       '@babel/preset-typescript',
+      'module:metro-react-native-babel-preset',
       [
-        'module:metro-react-native-babel-preset',
         'react-native',
         {
           native: {

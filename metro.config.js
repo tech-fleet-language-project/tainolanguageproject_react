@@ -11,41 +11,41 @@ module.exports = (() => {
 
   const {transformer, resolver} = config;
 
-  config.transformer = {
-    ...transformer,
-    babelTransformerPath: require.resolve(
-      'react-native-typescript-transformer',
-    ),
-    minifierPath: 'metro-minify-terser',
-    minifierConfig: {
-      compress: {
-        // enable all unsafe optimizations.
-        unsafe: true,
-        unsafe_arrows: true,
-        unsafe_comps: true,
-        unsafe_Function: true,
-        unsafe_math: true,
-        unsafe_symbols: true,
-        unsafe_methods: true,
-        unsafe_proto: true,
-        unsafe_regexp: true,
-        unsafe_undefined: true,
-        unused: true,
-      },
-    },
-    getTransformOptions: async () => ({
-      transform: {
-        experimentalImportSupport: true,
-        inlineRequires: true,
-      },
-    }),
-  };
+  // config.transformer = {
+  //   ...transformer,
+  //   babelTransformerPath: require.resolve(
+  //     'react-native-typescript-transformer',
+  //   ),
+  //   minifierPath: 'metro-minify-terser',
+  //   minifierConfig: {
+  //     compress: {
+  //       // enable all unsafe optimizations.
+  //       unsafe: true,
+  //       unsafe_arrows: true,
+  //       unsafe_comps: true,
+  //       unsafe_Function: true,
+  //       unsafe_math: true,
+  //       unsafe_symbols: true,
+  //       unsafe_methods: true,
+  //       unsafe_proto: true,
+  //       unsafe_regexp: true,
+  //       unsafe_undefined: true,
+  //       unused: true,
+  //     },
+  //   },
+  //   getTransformOptions: async () => ({
+  //     transform: {
+  //       experimentalImportSupport: true,
+  //       inlineRequires: true,
+  //     },
+  //   }),
+  // };
 
-  config.resolver = {
-    ...resolver,
-    assetExts: resolver.assetExts,
-    sourceExts: resolver.sourceExts,
-  };
+  // config.resolver = {
+  //   ...resolver,
+  //   assetExts: resolver.assetExts,
+  //   sourceExts: resolver.sourceExts,
+  // };
 
   return config;
 })();
