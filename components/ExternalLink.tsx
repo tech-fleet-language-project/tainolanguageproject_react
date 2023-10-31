@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Text,
   Linking,
+  TextProps,
 } from 'react-native';
 
 // use Themed.tsx and StyledText.tsx text: if it will be the same throughout the program or override properties
@@ -37,19 +38,23 @@ import {
 
 export function ExternalLink(props: {
   href: string;
-  children: Element,
+  text: TextProps;
   style?: {} | Object | undefined;
 }) {
-  const {href, children, style = {}} = props;
+  const {href, text, style = {}} = props;
 
-  const onPress = () =>
-    Linking.canOpenURL(href).then(() => {
-      Linking.openURL(href);
-    });
+  const onPress = (e: any) => {
+    if (Platform.OS !== 'web') {
+      e.preventDefault();
+      Linking.canOpenURL(href).then(() => {
+        Linking.openURL(href);
+      });
+    }
+  };
 
   return (
     <TouchableOpacity onPress={onPress}>
-      <Text style={[styles.text, style]}>{children}</Text>
+      <Text style={[styles.text, style]}>{text}</Text>
     </TouchableOpacity>
   );
 }
