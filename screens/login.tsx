@@ -40,7 +40,7 @@ export default function login() {
     }
   };
 
-	const auth = new AuthNative({});
+	const auth = new AuthNative();
 
 	const onLogin = async () => {
 		try {

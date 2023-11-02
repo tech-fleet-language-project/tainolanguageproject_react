@@ -1,7 +1,7 @@
 // const mongoose = require('mongoose');
 // const { Schema, model } = mongoose;
 
-import { Schema, model } from 'mongoose';
+import {Schema, model} from 'mongoose';
 
 interface IUser {
   firebaseID: string;
@@ -16,38 +16,38 @@ interface IUser {
 
 const User = new Schema<IUser>({
   firebaseID: {
-		type: String,
+    type: String,
   },
-	firstName: {
+  firstName: {
     type: String,
     required: [true, 'Error first name is required.'],
-		unique: true,
-	},
-	lastName: {
-		type: String,
-		required: [true, "Error last name is required."],
-		unique: true,
-	},
-	email: {
-		type: String,
-		required: [true, "Error email is required."],
-		unique: true,
+    unique: true,
   },
-	// password my be saved in Firestore or in DB
+  lastName: {
+    type: String,
+    required: [true, 'Error last name is required.'],
+    unique: true,
+  },
+  email: {
+    type: String,
+    required: [true, 'Error email is required.'],
+    unique: true,
+  },
+  // password my be saved in Firestore or in DB
   password: {
     type: String,
-		required: [true, "Error password is required."],
-		unique: true,
-	},
-	admin: {
-		type: Boolean,
-		default: false,
-	},
-	userAgreement: {
-		type: Boolean,
-		default: false,
-	},
-	timestamp: true,
+    required: [true, 'Error password is required.'],
+    unique: true,
+  },
+  admin: {
+    type: Boolean,
+    default: false,
+  },
+  userAgreement: {
+    type: Boolean,
+    default: false,
+  },
+  timestamp: true,
 });
 
 const UserProfile = model<IUser>('UserProfile', User);

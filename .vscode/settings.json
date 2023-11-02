@@ -17,6 +17,12 @@
   "eslint.run": "onSave",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  "java.configuration.updateBuildConfiguration": "automatic",
+  "cSpell.words": [
+    "appspot",
+    "firebaseapp",
+    "firebaseconfig",
+    "firestore",
+    "tainolanguagueproject"
+  ],
   "java.compile.nullAnalysis.mode": "automatic"
 }

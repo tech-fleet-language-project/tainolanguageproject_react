@@ -1,8 +1,8 @@
-import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
-import { getAnalytics } from "firebase/analytics";
-import { default as FirebaseConfig } from './constants/Firebase';
+import {initializeApp} from 'firebase/app';
+import {getAuth} from 'firebase/auth';
+import {getFirestore} from 'firebase/firestore';
+import {getAnalytics} from 'firebase/analytics';
+import {default as FirebaseConfig} from '../constants/Firebase';
 // expo-constant?
 // firestore to store user data?
 
@@ -45,9 +45,11 @@ const firebaseConfig: firebaseconfig = {
   measurementId: FirebaseConfig.measurementId,
 };
 
-// initialize firebase
-// @params {Object} firebaseConfig - the parameters to config firebase
-// @function
+/** 
+* initialize firebase
+* @params {Object} firebaseConfig - the parameters to config firebase
+* @function
+*/
 const fireApp = initializeApp(firebaseConfig);
 
 export const analytics = getAnalytics(fireApp);

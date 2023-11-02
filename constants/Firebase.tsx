@@ -1,4 +1,4 @@
-export const PROJECT_ID = 'tainolanguagueproject';
+export const PROJECT_ID: string = 'tainolanguagueproject';
 
 // apiKey: "API_KEY",
 // authDomain: "PROJECT_ID.firebaseapp.com",
@@ -24,4 +24,5 @@ export default {
 	appId: "1:266921452740:web:fdcb7e79dce32337091591",
 	// for Firebase JavaScript SDK v7.20.0 and later, `measurementId` is an optional field
 	measurementId: "G-K4W8CJHB9T",
+	analyticsAccountId: "",
 };

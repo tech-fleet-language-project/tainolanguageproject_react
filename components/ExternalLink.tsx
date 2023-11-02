@@ -38,7 +38,7 @@ import {
 
 export function ExternalLink(props: {
   href: string;
-  text: TextProps;
+  text: string;
   style?: {} | Object | undefined;
 }) {
   const {href, text, style = {}} = props;
