@@ -4,7 +4,7 @@ import analyticsAccountId from '@/constants/Firebase'
 
 const fetch = require('node-fetch');
 
-async function addGoogleAnalytics() {
+export default async function addGoogleAnalytics() {
   const accessToken = getAccessToken();
   const uri =
     'https://firebase.googleapis.com/v1beta1/projects/' +

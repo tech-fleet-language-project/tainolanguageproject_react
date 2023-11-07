@@ -4,10 +4,6 @@
 
 node_modules/
 
-# local env files
-
-.env\*.local
-
 # typescript
 
 \*.tsbuildinfo
@@ -18,33 +14,17 @@ node_modules/
 .build/\*
 !.build/test.js
 
-# vs code
-
-.vscode/\*
-
-index-env.d.ts
-
-.hintrc
-
-.gitignore
+# test files
 
 jest.config.js
 
-.babelrc
-
 # linter
 
-.eslintrc.json
 .eslintrc.js
 
 # config files
 
 babel.config.js
-metro.config.js
-tsconfig.json
-
-# package files
-
-package.json
-package-lock.json
-yarn.lock
+./metro.config.js
+prettierrc.js
+rn-cli.config.js

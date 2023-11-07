@@ -4,7 +4,7 @@ import getAccessToken from '../controllers/get-token';
 const fetch = require('node-fetch');
 
 // programmatically add Firebase to project
-async function addFirebase(PROJECT_ID: string) {
+export default async function addFirebase() {
   const accessToken = getAccessToken();
 	const uri =
     'https://firebase.googleapis.com/v1beta1/projects/' +

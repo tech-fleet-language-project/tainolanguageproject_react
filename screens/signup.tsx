@@ -2,19 +2,25 @@ import React, {useState} from 'react';
 import {
   StyleSheet,
   Image,
-  SafeAreaView,
   TextInput,
   Text,
   View,
   TouchableOpacity,
   Button,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Platform,
+  Keyboard,
 } from 'react-native';
-import AuthNative from '../controllers/native-auth';
+import {handleSignupFirebase} from '../controllers/firebase-auth';
 
 /**
- * signup to the application
+ * sign-up to the application
  * @param {string} email - email of user
  * @param {string} password - password of user
+ * @param {string} fname - first name of user
+ * @param {string} lname - last name of user
+ * @param {string} pnumber - phone number of user
  * @returns {JSX.Element}
  * @constructor
  */
@@ -31,26 +37,26 @@ export default function signup() {
   const [password, setPassword] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [passwordVisibility, setPasswordVisibility] = useState<boolean>(true);
-  const [eyeIcon, setEyeIcon] = useState<string>('open');
+  const [eyeIcon, setEyeIcon] = useState<boolean>(true);
   const [signupError, setSignupError] = useState<string>('');
 
   // password strength status check and prompt for user, no restriction
   const handlePasswordVisibility = () => {
-    if (!passwordVisibility && eyeIcon !== 'open') {
+    if (!passwordVisibility && !eyeIcon) {
       setPasswordVisibility(!passwordVisibility);
-      setEyeIcon('close');
-    } else if (passwordVisibility && eyeIcon === 'open') {
+      setEyeIcon(false);
+    } else if (passwordVisibility && eyeIcon) {
       setPasswordVisibility(passwordVisibility);
-      setEyeIcon('open');
+      setEyeIcon(true);
     }
   };
 
-  const auth = new AuthNative();
+  // const auth = new AuthNative();
 
   const onSignup = async () => {
     try {
-      if (email === '' && password === '') {
-        await auth.handleAuthorize();
+      if (email !== '' && password !== '') {
+        await handleSignupFirebase(email, password);
       } else {
         // redirect to home screen?
       }
@@ -60,81 +66,83 @@ export default function signup() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View>
-        <Image
-          source={{uri: 'https://reactnative.dev/docs/assets/p_cat2.png'}}
-        />
-      </View>
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.inputText}
-          value={email}
-          placeholder="First Name"
-          placeholderTextColor="AFAFAF"
-          onChangeText={email => {
-            return setFName(fname);
-          }}
-        />
-      </View>
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.inputText}
-          value={password}
-          placeholder="Last Name"
-          placeholderTextColor="AFAFAF"
-          onChangeText={password => {
-            return setLName(lname);
-          }}
-        />
-      </View>
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.inputText}
-          value={password}
-          placeholder="Phone Number"
-          placeholderTextColor="AFAFAF"
-          onChangeText={password => {
-            return setPNumber(pnumber);
-          }}
-        />
-      </View>
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.inputText}
-          value={email}
-          placeholder="Email"
-          placeholderTextColor="AFAFAF"
-          onChangeText={email => {
-            return setEmail(email);
-          }}
-        />
-      </View>
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.inputText}
-          value={password}
-          placeholder="Password"
-          placeholderTextColor="AFAFAF"
-          onChangeText={password => {
-            return setPassword(password);
-          }}
-        />
-      </View>
-      <View>
-        <TouchableOpacity>
-          <Button
-            title="Sign Up"
-            color="#f194ff"
-            accessibilityLabel="signup button"
-            onPress={onSignup}
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View>
+          <Image source={require('../assets/images/favicon.png')} />
+        </View>
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.inputText}
+            value={email}
+            placeholder="First Name"
+            placeholderTextColor="#AFAFAF"
+            onChangeText={email => {
+              return setFName(fname);
+            }}
           />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Text>Forget Password?</Text>
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
+        </View>
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.inputText}
+            value={password}
+            placeholder="Last Name"
+            placeholderTextColor="#AFAFAF"
+            onChangeText={password => {
+              return setLName(lname);
+            }}
+          />
+        </View>
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.inputText}
+            value={password}
+            placeholder="Phone Number"
+            placeholderTextColor="#AFAFAF"
+            onChangeText={password => {
+              return setPNumber(pnumber);
+            }}
+          />
+        </View>
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.inputText}
+            value={email}
+            placeholder="Email"
+            placeholderTextColor="#AFAFAF"
+            onChangeText={email => {
+              return setEmail(email);
+            }}
+          />
+        </View>
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.inputText}
+            value={password}
+            placeholder="Password"
+            placeholderTextColor="#AFAFAF"
+            onChangeText={password => {
+              return setPassword(password);
+            }}
+          />
+        </View>
+        <View>
+          <TouchableOpacity>
+            <Button
+              title="Sign Up"
+              color="#f194ff"
+              accessibilityLabel="signup button"
+              onPress={onSignup}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text>Forget Password?</Text>
+          </TouchableOpacity>
+        </View>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 }
 

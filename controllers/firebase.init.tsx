@@ -1,8 +1,15 @@
 import {initializeApp} from 'firebase/app';
-import {getAuth} from 'firebase/auth';
+import {
+  getAuth,
+  initializeAuth,
+  getReactNativePersistence,
+  connectAuthEmulator,
+} from 'firebase/auth';
 import {getFirestore} from 'firebase/firestore';
 import {getAnalytics} from 'firebase/analytics';
 import {default as FirebaseConfig} from '../constants/Firebase';
+import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
+
 // expo-constant?
 // firestore to store user data?
 
@@ -45,13 +52,22 @@ const firebaseConfig: firebaseconfig = {
   measurementId: FirebaseConfig.measurementId,
 };
 
-/** 
-* initialize firebase
-* @params {Object} firebaseConfig - the parameters to config firebase
-* @function
-*/
+/**
+ * initialize firebase
+ * @params {Object} firebaseConfig - the parameters to config firebase
+ * @function
+ */
+
+// expect error - Firebase: Error(auth/already-initialized).
+// most likely because the state is persisted: suspend error?
 const fireApp = initializeApp(firebaseConfig);
 
+
+export const auth = getAuth(fireApp);
+// initialize auth
+// export const auth = initializeAuth(fireApp, {
+//   persistence: getReactNativePersistence(ReactNativeAsyncStorage),
+// });
+connectAuthEmulator(auth, "http://127.0.0.1:9099");
 export const analytics = getAnalytics(fireApp);
-export const auth = getAuth();
-export const database = getFirestore();
+export const database = getFirestore(fireApp);
